@@ -19,6 +19,9 @@ public class Memorama extends javax.swing.JFrame {
     int valor =0;
     int valorsito=0;
     JLabel imagenes[]=new JLabel[9];
+    //**********************
+    Imagen img[]=new Imagen[9];
+    //************************
     public Memorama() {
         etiquetas=new ArrayList<JLabel>();
         int piezas[]=new int[9];
@@ -29,16 +32,34 @@ public class Memorama extends javax.swing.JFrame {
         for(int i:piezas){
             imagenes[valor]=new JLabel("Pieza "+ valor);
             imagenes[valor].setName("Pieza "+ valor);
+            //************************
+            img[valor]=new Imagen();
+            img[valor].setNombre(imagenes[valor].getName());
+            String ruta="/proyectofinal/img"+valorsito+".png";
+            img[valor].setRuta(ruta);
+            imagenes[valor].setText(img[valor].getRuta());
+            //*****************************
             imagenes[valor].setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectofinal/fondo.png")));
+            
             //imagenes[valor].setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectofinal/img"+valorsito+".png")));
             jPanel1.add(imagenes[valor]);
             imagenes[valor].addMouseListener(new MouseListener(){
 
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    jLabel1.setText(e.getComponent().getName());
+                    String nom;
+                    
+                     JLabel etiqueta=(JLabel) e.getComponent();
+                    jLabel1.setText(etiqueta.getName());
                     String nombre=jLabel1.getText();
-                    JLabel etiqueta=(JLabel) e.getComponent();
+                   for(Imagen i:img){
+                        nom= i.getNombre();
+                       if(nom.equals(nombre)){
+                           jLabel1.setText("Lo Encontre!!!");
+                           break;
+                       }
+                   }
+                    
                     etiqueta.setName(nombre);
                     etiqueta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectofinal/img1.png")));
                     }
