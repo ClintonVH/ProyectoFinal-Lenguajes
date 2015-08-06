@@ -52,16 +52,21 @@ public class Memorama extends javax.swing.JFrame {
                      JLabel etiqueta=(JLabel) e.getComponent();
                     jLabel1.setText(etiqueta.getName());
                     String nombre=jLabel1.getText();
-                   for(Imagen i:img){
+              
+                    for(Imagen i:img){
                         nom= i.getNombre();
                        if(nom.equals(nombre)){
-                           jLabel1.setText("Lo Encontre!!!");
+                          
+                                jLabel1.setText(nom);
+                                jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource(i.getRuta())));
+                                etiqueta.setIcon(new javax.swing.ImageIcon(getClass().getResource(i.getRuta())));
+                                
                            break;
                        }
                    }
                     
                     etiqueta.setName(nombre);
-                    etiqueta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectofinal/img1.png")));
+                   // etiqueta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectofinal/img1.png")));
                     }
 
                 @Override
