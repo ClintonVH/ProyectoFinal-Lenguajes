@@ -18,13 +18,13 @@ public class Memorama extends javax.swing.JFrame {
     ArrayList<JLabel> etiquetas;
     int valor =0;
     int valorsito=0;
-    JLabel imagenes[]=new JLabel[9];
+    JLabel imagenes[]=new JLabel[10];
     //**********************
-    Imagen img[]=new Imagen[9];
+    Imagen img[]=new Imagen[10];
     //************************
     public Memorama() {
         etiquetas=new ArrayList<JLabel>();
-        int piezas[]=new int[9];
+        int piezas[]=new int[10];
         initComponents();
         int largo=(9/3)*48;
         int alto=(9/3)*48;
@@ -39,12 +39,21 @@ public class Memorama extends javax.swing.JFrame {
             img[valor].setRuta(ruta);
             imagenes[valor].setText(img[valor].getRuta());
             //*****************************
-            imagenes[valor].setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectofinal/fondo.png")));
+              imagenes[valor].setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectofinal/fondo.png")));
             
             //imagenes[valor].setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectofinal/img"+valorsito+".png")));
             jPanel1.add(imagenes[valor]);
             imagenes[valor].addMouseListener(new MouseListener(){
-
+               
+                //------------------variables---------------
+                int toque=0;
+               String rutaimgtoque;
+               String nombreimgtoque;
+               String rutaimgtoque1;
+               String nombreimgtoque1;
+               String rutaimgtoque2;
+               String nombreimgtoque2;
+               
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     String nom;
@@ -55,16 +64,29 @@ public class Memorama extends javax.swing.JFrame {
               
                     for(Imagen i:img){
                         nom= i.getNombre();
-                       if(nom.equals(nombre)){
+                       if(nom.equals(etiqueta.getName())){
                           
                                 jLabel1.setText(nom);
-                                jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource(i.getRuta())));
-                                etiqueta.setIcon(new javax.swing.ImageIcon(getClass().getResource(i.getRuta())));
+                                rutaimgtoque=i.getRuta();
+                                nombreimgtoque=i.getNombre();
                                 
-                           break;
+                         break;
+                                                
                        }
+                       
                    }
-                    
+                    if(toque==0){
+                               rutaimgtoque1=rutaimgtoque;
+                               nombreimgtoque1=nombreimgtoque;
+                                toque=1;
+                                }else{
+                               rutaimgtoque2=rutaimgtoque;
+                               nombreimgtoque2=nombreimgtoque;
+                                toque=0; 
+                                }
+                    jLabel1.setText(""+toque);
+                     jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource(rutaimgtoque1)));
+                                etiqueta.setIcon(new javax.swing.ImageIcon(getClass().getResource(rutaimgtoque1)));
                     etiqueta.setName(nombre);
                    // etiqueta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectofinal/img1.png")));
                     }
